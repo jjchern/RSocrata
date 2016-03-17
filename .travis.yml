@@ -1,32 +1,32 @@
-# Sample .travis.yml for R projects.
-#
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-#   http://docs.travis-ci.com/user/languages/r/
 sudo: false
-
 language: r
 cache: packages
 r:
-  - oldrel
-  - release
-  - devel
-
+- oldrel
+- release
+- devel
 warnings_are_errors: true
-
 before_script:
-  - Rscript -e 'install.packages("covr", repos="http://mirror.las.iastate.edu/CRAN/")'
-
+- Rscript -e 'install.packages("covr", repos="http://mirror.las.iastate.edu/CRAN/")'
 after_success:
-  - Rscript -e 'library(covr);coveralls()'
-
+- Rscript -e 'library(covr);coveralls()'
+deploy:
+  provider: s3
+  access_key_id: AKIAJQCMYE4ESXOZEZAQ
+  secret_access_key:
+    secure: HGDnprL5Nt2U8yGDNFaPyGIHO598Dcx7VwwaYhDvabWosVAhbLv9ZfpIPvlMpv7fY9V23VJGevOHxtRAYh3LyLCnYm4pOIqCNYR45fVR3vibjtfj4fWoDurXttJKkOHDUQaIlgDVQUWp4QjlsWHXku7cEiHrX4T0LLk8CD54Arg=
+  bucket: github-rsocrata-deploy
+  upload-dir: builds
+  acl: ''
+  on:
+    repo: Chicago/RSocrata
 notifications:
   email:
     on_success: change
     on_failure: change
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/104bab7ef95b3a1bfd4c
-    on_success: always  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: never     # options: [always|never|change] default: always
+    - https://webhooks.gitter.im/e/104bab7ef95b3a1bfd4c
+    on_success: always
+    on_failure: always
+    on_start: never
