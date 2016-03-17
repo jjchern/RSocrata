@@ -20,6 +20,18 @@ deploy:
   acl: ''
   on:
     repo: Chicago/RSocrata
+    all_branches: true
+deploy:
+  provider: s3
+  access_key_id: AKIAJQCMYE4ESXOZEZAQ
+  secret_access_key:
+    secure: HGDnprL5Nt2U8yGDNFaPyGIHO598Dcx7VwwaYhDvabWosVAhbLv9ZfpIPvlMpv7fY9V23VJGevOHxtRAYh3LyLCnYm4pOIqCNYR45fVR3vibjtfj4fWoDurXttJKkOHDUQaIlgDVQUWp4QjlsWHXku7cEiHrX4T0LLk8CD54Arg=
+  bucket: github-rsocrata-deploy
+  upload-dir: stable
+  acl: ''
+  on:
+    repo: Chicago/RSocrata
+    tags: true
 notifications:
   email:
     on_success: change
