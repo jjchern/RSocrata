@@ -20,6 +20,9 @@ deploy:
     on:
       repo: Chicago/RSocrata
       all_branches: true
+    before_deploy:
+      - "R CMD build"
+      - "rm -rf RSocrata/"
   - provider: s3
     access_key_id: AKIAJQCMYE4ESXOZEZAQ
     secret_access_key:
